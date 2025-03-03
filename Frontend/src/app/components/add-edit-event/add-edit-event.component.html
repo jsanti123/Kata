@@ -1,0 +1,37 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div class="row mt-3" *ngIf="!loading">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
+            <div class="card-header text-center">{{ operacion }}Evento</div>
+            <div class="card-body">
+                <form [formGroup]="form" (ngSubmit)="addEvent()">
+                    <input formControlName="_id" type="hidden">
+                    <input formControlName="TitleEvent" type="text" class="form-control" placeholder="Título del Evento">
+                    <span *ngIf="form.get('TitleEvent')?.hasError('required') && form.get('TitleEvent')?.touched">
+                        El campo Titulo es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="DateEvent" type="datetime-local" class="form-control mt-2" placeholder="Fecha del evento">
+                    <span *ngIf="form.get('DateEvent')?.hasError('required') && form.get('DateEvent')?.touched">
+                        El campo Fecha es <strong>requerido</strong>
+                    </span>
+                    <textarea formControlName="Description" class="form-control mt-2" rows="4" cols="50" placeholder="Descripción del Evento"></textarea>
+                    <span *ngIf="form.get('Description')?.hasError('required') && form.get('Description')?.touched">
+                        El campo Descripcion es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="Location" type="text" class="form-control mt-2" placeholder="Dirección del Evento">
+                    <span *ngIf="form.get('Location')?.hasError('required') && form.get('Location')?.touched">
+                        El campo Direccion es <strong>requerido</strong>
+                    </span>
+                    <div class="row text-center mt-3">
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-outline-primary" [disabled]="form.invalid">Aceptar</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-outline-secondary" routerLink="/" >Volver</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

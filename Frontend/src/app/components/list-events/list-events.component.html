@@ -1,0 +1,32 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div class="container mt-3" *ngIf="!loading">
+    <div class="title-event">
+      <h2 class="active">Listado de Eventos</h2>
+      <button type="button" class="btn btn-outline-dark" routerLink="/add-event">Agregar Evento</button>
+    </div>
+    <table class="table table-hover" *ngIf="listEvents.length > 0">
+        <thead class="table-dark text-center">
+          <tr>
+            <th scope="col">EVENTO</th>
+            <th scope="col">FECHA</th>
+            <th scope="col">DESCRIPCIÓN</th>
+            <th scope="col">LUGAR</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let event of listEvents | paginate: { itemsPerPage: 5, currentPage: currentPage }"class="table-active text-center">
+            <td>{{ event.TitleEvent }}</td>
+            <td>{{ event.DateEvent.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}}</td>
+            <td>{{ event.Description }}</td>
+            <td>{{ event.Location }}</td>
+            <td>
+              <button type="button" class="btn btn-outline-info btn-sm" routerLink="/edit-event/{{ event._id }}">Editar</button>
+              <button type="button" class="btn btn-outline-danger btn-sm ms-2" (click)="deleteEvent(event._id!)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="currentPage = $event" *ngIf="listEvents.length > 0"></pagination-controls>
+      <h5 *ngIf="listEvents.length == 0">No hay ningun <strong>evento</strong> programado</h5>
+</div>
