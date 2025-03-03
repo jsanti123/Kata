@@ -1,18 +1,18 @@
 # Reto Tecnico - Desarrollador Junior
 
 ## Tabla de Contenidos
-- [Requisitos tecnicos](#requisitos)
+- [Requisitos tecnicos](#requisitos-tecnicos)
 - [Configuración de Variables de Entorno](#configuración-de-variables-de-entorno)
-- [Instalación y Uso](#instalación)
-- [Test de la APP](#test)
-- [Tecnologias que se usaron](#Tecnologias)
+- [Instalación y Uso](#instalacion-y-uso)
+- [Test de la APP](#test-de-la-app)
+- [Tecnologias que se usaron](#tecnologias-que-se-usaron)
 
-## Requisitos Tecnicos
+## Requisitos tecnicos
 - **Node v20.17.0**
 - **npm v10.8.2**
 - **Angular CLI 19.2.0**
 
-## Configuracion de variables de entorno
+## Configuración de Variables de Entorno
 - Crea un archivo `.env` en la raiz del  proyecto backend
 - Abre el archivo y agrega las siguientes variables
     ```bash
