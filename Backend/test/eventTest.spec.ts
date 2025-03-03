@@ -8,13 +8,13 @@ afterAll(async () => {
     await mongoServer.stop();
 });
 
-describe("POST /api/events", () => {
+describe("POST /api/event", () => {
     test("It should respond with status 201 and correct response", async () => {
         const response = await request(app)
             .post("/api/event")
             .send({
                 TitleEvent: "Test Event",
-                DateEvent: "2022-01-01T00:00:00",
+                DateEvent: "2022-01-01T00:00",
                 Description: "Test Description",
                 Location: "Test Location"
             });
@@ -40,7 +40,7 @@ describe("GET /api/event/:eventId", () => {
             .post("/api/event")
             .send({
                 TitleEvent: "Test Event",
-                DateEvent: "2022-01-01T00:00:00",
+                DateEvent: "2022-01-01T00:00",
                 Description: "Test Description",
                 Location: "Test Location"
             });
@@ -58,7 +58,7 @@ describe("PUT /api/event/:eventId", () => {
             .post("/api/event")
             .send({
                 TitleEvent: "Test Event",
-                DateEvent: "2022-01-01T00:00:00",
+                DateEvent: "2022-01-01T00:00",
                 Description: "Test Description",
                 Location: "Test Location"
             });
