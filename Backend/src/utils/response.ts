@@ -23,9 +23,9 @@ export const successResponse = (data: EventData | EventData[], message: string):
     }
 }
 
-export const errorResponse = (message: any, errors?: any[]): ApiResponse => {
+export const errorResponse = (status: StatusCodes, message: any, errors?: any[]): ApiResponse => {
     return {
-        status: StatusCodes.BAD_REQUEST,
+        status: status,
         message,
         errors
     }

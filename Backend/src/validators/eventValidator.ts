@@ -35,7 +35,7 @@ export const validateEventFields = (req: Request, res: Response, next: NextFunct
                 Location: 'string'
             }
         }
-        res.status(StatusCodes.BAD_REQUEST).send(errorResponse(message, errors.array()));
+        res.status(StatusCodes.BAD_REQUEST).send(errorResponse(StatusCodes.BAD_REQUEST, message, errors.array()));
         return;
     }
     next();
@@ -47,7 +47,7 @@ export const validateEventBody = (req: Request, res: Response, next: NextFunctio
       const extraFields = receivedFields.filter(field => !validFields.includes(field));
   
     if (extraFields.length > 0) {
-        res.status(StatusCodes.BAD_REQUEST).send(errorResponse('Invalid Body', extraFields));
+        res.status(StatusCodes.BAD_REQUEST).send(errorResponse(StatusCodes.BAD_REQUEST, 'Invalid Body', extraFields));
         return;
     }
     next();
@@ -58,7 +58,7 @@ export const validateUpdateEventBody = (req: Request, res: Response, next: NextF
     const receivedFields = Object.keys(req.body);
     const extraFields = receivedFields.filter(field => validFields.includes(field));
     if (extraFields.length == 0) {
-        res.status(StatusCodes.BAD_REQUEST).send(errorResponse('Its required to send at least one field to update', []));
+        res.status(StatusCodes.BAD_REQUEST).send(errorResponse(StatusCodes.BAD_REQUEST, 'Its required to send at least one field to update', []));
         return;
     }
     next();

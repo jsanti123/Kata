@@ -24,7 +24,7 @@ export class EventController {
             res.status(StatusCodes.CREATED).send(successResponse(data, 'Event created'));
             
         }catch(error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse('Error creating event', []));
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse(StatusCodes.INTERNAL_SERVER_ERROR, 'Error creating event', []));
             console.log(error);
         }
     }
@@ -44,7 +44,7 @@ export class EventController {
             res.status(StatusCodes.OK).send(successResponse(data, 'Events retrieved'));
         } catch(error) {
             console.log(error);
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse('Error getting events', []));
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse(StatusCodes.INTERNAL_SERVER_ERROR, 'Error getting events', []));
         }
     }
 
@@ -53,7 +53,7 @@ export class EventController {
             const { eventId } = req.params;
             const event = await Event.findById(eventId);
             if (!event) {
-                res.status(StatusCodes.NOT_FOUND).send(errorResponse('Event not found', []));
+                res.status(StatusCodes.NOT_FOUND).send(errorResponse(StatusCodes.NOT_FOUND, 'Event not found', []));
                 return;
             }
             const data: EventData = {
@@ -65,7 +65,7 @@ export class EventController {
             }
             res.status(StatusCodes.OK).send(successResponse(data, 'Event found'));
         } catch(error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse('Error getting event', []));
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse(StatusCodes.INTERNAL_SERVER_ERROR, 'Error getting event', []));
         }
     }
 
@@ -80,7 +80,7 @@ export class EventController {
                 Location
             }, { new: true, runValidators: true });
             if (!event) {
-                res.status(StatusCodes.NOT_FOUND).send(errorResponse('Event not found', []));
+                res.status(StatusCodes.NOT_FOUND).send(errorResponse(StatusCodes.NOT_FOUND, 'Event not found', []));
                 return;
             } else {
                 const data: EventData = {
@@ -93,7 +93,7 @@ export class EventController {
                 res.status(StatusCodes.OK).send(successResponse(data, 'Event updated'));
             }
         } catch(error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse('Error updating event', []));
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse(StatusCodes.INTERNAL_SERVER_ERROR, 'Error updating event', []));
         }
     }
 
@@ -102,7 +102,7 @@ export class EventController {
             const { eventId } = req.params;
             const event = await Event.findByIdAndDelete(eventId);
             if (!event) {
-                res.status(StatusCodes.NOT_FOUND).send(errorResponse('Event not found', []));
+                res.status(StatusCodes.NOT_FOUND).send(errorResponse(StatusCodes.NOT_FOUND, 'Event not found', []));
                 return;
             }
             const data: EventData = {
@@ -114,7 +114,7 @@ export class EventController {
             }
             res.status(StatusCodes.OK).send(successResponse(data, 'Event deleted'));
         } catch(error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse('Error deleting event', []));
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(errorResponse(StatusCodes.INTERNAL_SERVER_ERROR, 'Error deleting event', []));
         }
     }
 

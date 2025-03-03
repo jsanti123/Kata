@@ -23,6 +23,18 @@ describe("POST /api/event", () => {
         expect(response.body.data).toBeInstanceOf(Object);
     });
 
+    test("It should respond with status 400 and correct response", async () => {
+        const response = await request(app)
+            .post("/api/event")
+            .send({
+                TitleEvent: "Test Event",
+                DateEvent: "2022-01-01T00:00",
+                Description: "Test Description"
+            });
+        expect(response.status).toBe(400);
+        expect(response.body.message.message).toBe("Invalid Fields");
+
+    });
 });
 
 describe("GET /api/events", () => {
@@ -32,6 +44,7 @@ describe("GET /api/events", () => {
         expect(response.body.message).toBe("Events retrieved");
         expect(response.body.data).toBeInstanceOf(Array);
     });
+
 });
 
 describe("GET /api/event/:eventId", () => {
@@ -49,6 +62,12 @@ describe("GET /api/event/:eventId", () => {
         expect(response.status).toBe(200);
         expect(response.body.message).toBe("Event found");
         expect(event.body.data._id.toString()).toBe(response.body.data._id);
+    });
+
+    test("It should respond with status 404 and correct response", async () => {
+        const response = await request(app).get("/api/event/123");
+        expect(response.status).toBe(404);
+        expect(response.body.message).toBe("Event not found");
     });
 });
 
@@ -71,6 +90,24 @@ describe("PUT /api/event/:eventId", () => {
         expect(response.body.message).toBe("Event updated");
         expect(response.body.data.TitleEvent).toBe("Updated Test Event");
     });
+
+    test("It should respond with status 400 and correct response", async () => {
+        const event = await request(app)
+            .post("/api/event")
+            .send({
+                TitleEvent: "Test Event",
+                DateEvent: "2022-01-01T00:00",
+                Description: "Test Description",
+                Location: "Test Location"
+            });
+        const response = await request(app)
+            .put(`/api/event/${event.body.data._id.toString()}`)
+            .send({
+                TitleEvent: ""
+            });
+        expect(response.body.status).toBe(500);
+        expect(response.body.message).toBe("Error updating event");
+    });
 });
 
 describe("DELETE /api/event/:eventId", () => {
@@ -83,6 +120,12 @@ describe("DELETE /api/event/:eventId", () => {
             expect(response.status).toBe(200);
             expect(response.body.message).toBe("Event deleted");
         }
+    });
+
+    test("It should respond with status 404 and correct response", async () => {
+        const response = await request(app).delete("/api/event/123");
+        expect(response.status).toBe(404);
+        expect(response.body.message).toBe("Event not found");
     });
 });
 
