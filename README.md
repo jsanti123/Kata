@@ -22,7 +22,7 @@
    DB_PORT=0
    DB_NAME=''
    DB_CLUSTER=''  
-- Configurar las varibales de entorno con los siguientes valores [enlace](https://docs.google.com/document/d/11M6kMVD2vPdB0yH4CdMQLfENNwXF1gljYhPYD7VH6zE/edit?tab=t.0)
+- Configurar las variables de entorno con los siguientes valores [enlace](https://docs.google.com/document/d/11M6kMVD2vPdB0yH4CdMQLfENNwXF1gljYhPYD7VH6zE/edit?tab=t.0)
 
 ## Instalacion y Uso
 - git clone https://github.com/jsanti123/Kata.git en la carpeta destino
